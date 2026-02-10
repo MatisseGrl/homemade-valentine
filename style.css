@@ -1,0 +1,97 @@
+:root{
+  --bg: #050507;
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+  margin: 0;
+}
+
+body{
+  background:
+    radial-gradient(1200px 700px at 25% 20%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(900px 600px at 80% 70%, rgba(255,255,255,0.04), transparent 60%),
+    var(--bg);
+  color: rgba(255,255,255,0.85);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.stage{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px 18px;
+}
+
+/* Le bouton = exactement la photo, aucune “carte” */
+.photoButton{
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+
+  display: inline-block;  /* épouse la taille de l’image */
+  line-height: 0;         /* évite l’espace sous l’image */
+  box-shadow: none;
+  border-radius: 0;
+  outline: none;
+}
+
+/* Focus clavier propre */
+.photoButton:focus-visible{
+  outline: 2px solid rgba(255,255,255,0.25);
+  outline-offset: 8px;
+}
+
+/* Images : une seule visible à la fois */
+.img{
+  display: none;
+
+  width: auto;
+  height: auto;
+  max-width: 86vw;
+  max-height: 70vh;
+
+  border-radius: 0; /* mets 12px si tu veux un léger arrondi */
+  box-shadow: 0 18px 55px rgba(0,0,0,0.55);
+
+  transition: transform 240ms ease, box-shadow 240ms ease, opacity 240ms ease;
+}
+
+.img.is-active{
+  display: block;
+}
+
+/* petit effet au hover, mais c’est la photo, pas un bloc */
+.photoButton:hover .img.is-active{
+  transform: scale(1.01);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.65);
+}
+
+.hint{
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  opacity: 0.55;
+  user-select: none;
+}
+
+.subhint{
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.35;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .img{
+    transition: none !important;
+  }
+}
